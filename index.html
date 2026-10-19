@@ -1,0 +1,358 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Catálogo</title>
+<meta name="description" content="Productos disponibles de Bath &amp; Body Works y Victoria's Secret: body mist, cremas, baño, sets de regalo y velas.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_MX">
+<meta property="og:title" content="Catálogo · Bath &amp; Body Works y Victoria's Secret">
+<meta property="og:description" content="Productos disponibles: body mist, cremas, baño, sets de regalo y velas.">
+<meta property="og:url" content="https://bodyfragrance.github.io/">
+<meta property="og:image" content="https://bodyfragrance.github.io/og.jpg">
+<meta property="og:image:secure_url" content="https://bodyfragrance.github.io/og.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Portada del catálogo">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#FAF6F1">
+<meta name="format-detection" content="telephone=no">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://script.google.com">
+<link rel="preconnect" href="https://script.googleusercontent.com">
+<style>
+  :root {
+    --ivory: #FAF6F1; --ink: #2A2226; --muted: #857A7E; --gold: #A8834B;
+    --rule: #DDCDB6; --edge: #E8DED2; --pill: #EEE2D1;
+    --serif: Georgia, "Times New Roman", "Noto Serif", serif;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    color-scheme: light;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+  html.lock { overflow: hidden; }
+  body { margin: 0; background: var(--ivory); color: var(--ink); font-family: var(--sans); line-height: 1.4; }
+  a { color: inherit; text-decoration: none; -webkit-tap-highlight-color: transparent; }
+  button { font: inherit; }
+  .wrap { max-width: 1040px; margin: 0 auto; padding: 0 16px; }
+  .eyebrow { margin: 0; font: 600 11px/1.4 var(--sans); letter-spacing: .18em; text-transform: uppercase; color: var(--gold); }
+  .eyebrow span { color: var(--muted); font-weight: 400; letter-spacing: .04em; text-transform: none; font-size: 12px; }
+
+  /* Portada */
+  .hero { text-align: center; padding: calc(44px + env(safe-area-inset-top)) 0 8px; }
+  .hero h1 { font: 400 clamp(52px, 15vw, 96px)/1 var(--serif); margin: 0; letter-spacing: -.01em; }
+  .hero .regla { width: 48px; height: 1px; background: var(--gold); margin: 20px auto 14px; }
+  .hero .edicion { font: italic 400 clamp(20px, 5.5vw, 26px)/1.2 var(--serif); color: var(--muted); margin: 0; min-height: 1.2em; }
+  .abanico { display: flex; justify-content: center; align-items: flex-end; gap: 8px; margin: 34px auto 22px; max-width: 560px; }
+  .abanico img { width: 18%; height: auto; border-radius: 9px; border: 1px solid var(--edge); }
+  .abanico .f1, .abanico .f3 { margin-bottom: 14px; }
+  .abanico .f2 { width: 21%; margin-bottom: 28px; }
+  .marcas { font: 400 10.5px/1.6 var(--sans); letter-spacing: .16em; color: var(--muted); text-transform: uppercase; margin: 0 0 22px; }
+  .marcas span { white-space: nowrap; }
+  .acciones { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+  .btn { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 20px; border-radius: 999px;
+         font: 600 14px/1 var(--sans); border: 1px solid var(--gold); color: var(--gold); background: none; cursor: pointer; }
+  .btn.lleno { background: var(--ink); border-color: var(--ink); color: var(--ivory); }
+
+  /* Índice */
+  #indice { padding: 40px 0 8px; scroll-margin-top: 8px; }
+  #indice h2 { text-align: center; }
+  #indice .ayuda { text-align: center; color: var(--muted); font-size: 13px; margin: 4px 0 14px; }
+  .lista { list-style: none; margin: 0 auto; padding: 0; max-width: 560px; }
+  .lista a { display: grid; grid-template-columns: 1fr auto; grid-template-areas: "t f" "m f"; align-items: center;
+             padding: 13px 4px; border-bottom: 1px dashed var(--rule); min-height: 56px; }
+  .lista li:first-child a { border-top: 1px dashed var(--rule); }
+  .lista .t { grid-area: t; font: 400 19px/1.25 var(--serif); }
+  .lista .m { grid-area: m; font-size: 12.5px; color: var(--muted); }
+  .lista .flecha { grid-area: f; color: var(--gold); font-size: 20px; padding-left: 12px; }
+  .lista a:active { background: var(--pill); }
+
+  /* Estado de carga */
+  .estado { text-align: center; color: var(--muted); padding: 32px 0; }
+  .estado p { margin: 0 0 16px; }
+  .cargando::before { content: ""; display: block; width: 28px; height: 28px; margin: 0 auto 14px; border-radius: 50%;
+                      border: 2px solid var(--rule); border-top-color: var(--gold); animation: gira 0.9s linear infinite; }
+  @keyframes gira { to { transform: rotate(360deg); } }
+
+  /* Secciones */
+  .seccion { padding-top: 36px; scroll-margin-top: 8px; }
+  .sec-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 12px;
+              border-bottom: 1px solid var(--gold); padding-bottom: 10px; margin-bottom: 16px; }
+  h2 { font: 400 clamp(28px, 7.5vw, 36px)/1.1 var(--serif); margin: 4px 0 0; }
+  .pill { flex: none; display: inline-flex; align-items: center; min-height: 36px; padding: 0 14px; border-radius: 999px;
+          background: var(--pill); color: var(--gold); font: 600 13px/1 var(--sans); }
+  .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px 12px; }
+  @media (min-width: 640px) { .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px 16px; } }
+  @media (min-width: 960px) { .grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+  .card { display: block; }
+  a.card { cursor: zoom-in; }
+  .foto { position: relative; display: block; border-radius: 10px; overflow: hidden; border: 1px solid var(--edge); background: #eee6dc; }
+  .foto img { display: block; width: 100%; height: auto; }
+  .num { position: absolute; top: 8px; left: 8px; min-width: 32px; padding: 3px 8px; border-radius: 999px; text-align: center;
+         background: rgba(250, 246, 241, .92); font: 600 12px/1.2 var(--sans); color: var(--ink); }
+  .sin-foto { aspect-ratio: 714 / 1280; display: flex; flex-direction: column; align-items: center; justify-content: center;
+              gap: 10px; padding: 18px; text-align: center; background: linear-gradient(160deg, #F4ECE2, #E9DCCB); }
+  .sin-foto .linea { font: 600 10px/1.3 var(--sans); letter-spacing: .16em; text-transform: uppercase; color: var(--gold); }
+  .sin-foto .aroma { font: 400 clamp(17px, 4.6vw, 22px)/1.2 var(--serif); color: var(--ink); }
+  .sin-foto .regla { width: 28px; height: 1px; background: var(--gold); }
+  .nombre { display: block; margin-top: 9px; font: 400 16px/1.25 var(--serif); }
+  .tipo { display: block; font-size: 12.5px; color: var(--muted); margin-top: 2px; }
+
+  footer { text-align: center; padding: 48px 0 calc(96px + env(safe-area-inset-bottom)); }
+  footer p { margin: 0 0 6px; }
+  footer small { color: var(--muted); }
+
+  /* Botón flotante al índice */
+  .flotante { position: fixed; right: 16px; bottom: calc(16px + env(safe-area-inset-bottom)); z-index: 5;
+              display: inline-flex; align-items: center; min-height: 44px; padding: 0 18px; border-radius: 999px;
+              background: var(--ink); color: var(--ivory); font: 600 14px/1 var(--sans);
+              box-shadow: 0 6px 20px rgba(42, 34, 38, .25); opacity: 0; transform: translateY(12px);
+              pointer-events: none; transition: opacity .2s, transform .2s; }
+  .flotante.ver { opacity: 1; transform: none; pointer-events: auto; }
+
+  /* Visor de producto */
+  .visor { position: fixed; inset: 0; z-index: 10; background: #181315; display: flex; flex-direction: column;
+           align-items: center; justify-content: center; padding: calc(56px + env(safe-area-inset-top)) 12px calc(20px + env(safe-area-inset-bottom)); }
+  .visor[hidden] { display: none; }
+  .visor img { max-width: 100%; max-height: calc(100vh - 150px); max-height: calc(100dvh - 150px); border-radius: 10px; }
+  .visor .cap { color: #f3ece4; font: 400 16px/1.3 var(--serif); margin-top: 12px; text-align: center; padding: 0 56px; }
+  .visor button { position: absolute; width: 44px; height: 44px; border-radius: 50%; border: 0; background: rgba(250, 246, 241, .14);
+                  color: #fff; font: 400 24px/1 var(--sans); cursor: pointer; }
+  .visor .cerrar { top: calc(10px + env(safe-area-inset-top)); right: 12px; }
+  .visor .ant, .visor .sig { bottom: calc(18px + env(safe-area-inset-bottom)); }
+  .visor .ant { left: 12px; }
+  .visor .sig { right: 12px; }
+  @media (min-width: 640px) { .visor .ant, .visor .sig { top: 50%; bottom: auto; margin-top: -22px; } }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .cargando::before { animation: none; } }
+</style>
+</head>
+<body>
+<main class="wrap">
+  <header class="hero">
+    <h1>Catálogo</h1>
+    <div class="regla"></div>
+    <p class="edicion" id="edicion"></p>
+    <div class="abanico" aria-hidden="true"><img src="img/03.jpg" alt="" width="714" height="1280" class="f0"><img src="img/28.jpg" alt="" width="714" height="1280" class="f1"><img src="img/01.jpg" alt="" width="714" height="1280" class="f2"><img src="img/30.jpg" alt="" width="714" height="1280" class="f3"><img src="img/05.jpg" alt="" width="714" height="1280" class="f4"></div>
+    <p class="marcas"><span>Bath &amp; Body Works</span> · <span>Victoria's Secret</span></p>
+    <div class="acciones">
+      <a class="btn lleno" href="#indice">Ver catálogo</a>
+    </div>
+  </header>
+
+  <nav id="indice" aria-label="Índice">
+    <h2>Índice</h2>
+    <p class="ayuda" id="ayuda">Cargando productos disponibles…</p>
+    <ol class="lista" id="lista"></ol>
+  </nav>
+
+  <div id="catalogo">
+    <div class="estado cargando" id="estado"><p>Cargando productos disponibles…</p></div>
+  </div>
+
+  <footer id="pie" hidden>
+    <p class="eyebrow">Pide tu producto indicando su clave</p>
+    <small>Solo se muestran productos disponibles.</small>
+  </footer>
+</main>
+
+<a class="flotante" href="#indice" id="flotante">↑ Índice</a>
+
+<div class="visor" id="visor" hidden role="dialog" aria-modal="true" aria-label="Producto">
+  <button class="cerrar" type="button" aria-label="Cerrar">✕</button>
+  <img alt="">
+  <p class="cap"></p>
+  <button class="ant" type="button" aria-label="Anterior">‹</button>
+  <button class="sig" type="button" aria-label="Siguiente">›</button>
+</div>
+
+<noscript><p class="wrap estado">Activa JavaScript para ver los productos disponibles.</p></noscript>
+
+<script>
+(function () {
+  // Apps Script que lee la hoja "Productos" (columna Disponible = casilla marcada)
+  var API = 'https://script.google.com/macros/s/AKfycbzJcu212W-iqU2ltwowm38agqzaKRsL0VIAV1IDdDMMoQQOF8y0W_XyovD73U40_VsJQQ/exec';
+
+  var MARCAS = ['Bath & Body Works', "Victoria's Secret"];
+  var SECCIONES = {
+    'Fragancia': 'Fragancias',
+    'Cuidado corporal': 'Cuidado corporal',
+    'Cuidado capilar': 'Cuidado capilar',
+    'Sets de regalo': 'Sets de regalo',
+    'Hogar': 'Velas',
+    'Higiene de manos': 'Gel antibacterial',
+    'Accesorios': 'Porta gel antibacterial',
+    'Ropa íntima': 'Ropa íntima'
+  };
+  var ORDEN_SECCION = Object.keys(SECCIONES);
+
+  var $ = function (id) { return document.getElementById(id); };
+  var MESES = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+  var hoy = new Date();
+  $('edicion').textContent = MESES[hoy.getMonth()] + ' ' + hoy.getFullYear();
+
+  function esc(s) {
+    return String(s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+  function slug(s) {
+    return s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+  }
+  function titulo(p) { return p.aroma + (p.variante ? ' ' + p.variante : ''); }
+  function detalle(p) {
+    var partes = [p.tipo];
+    if (p.presentacion) partes.push(p.presentacion);
+    if (p.linea && p.linea !== p.marca) partes.push(p.linea);
+    return partes.join(' · ');
+  }
+
+  // Si dos claves comparten la misma foto, se muestra una sola tarjeta
+  function sinRepetidos(productos) {
+    var vistos = {}, salida = [];
+    productos.forEach(function (p) {
+      var k = p.imagen || (p.marca + '|' + p.tipo + '|' + titulo(p) + '|' + p.presentacion).toLowerCase();
+      if (!(k in vistos)) { vistos[k] = salida.length; salida.push(p); }
+    });
+    return salida;
+  }
+
+  function agrupar(productos) {
+    var grupos = {};
+    productos.forEach(function (p) {
+      var marca = p.marca || 'Otros';
+      var sec = SECCIONES[p.categoria] || p.categoria || 'Otros';
+      var clave = marca + ' · ' + sec;
+      (grupos[clave] = grupos[clave] || { marca: marca, titulo: sec, cat: p.categoria, items: [] }).items.push(p);
+    });
+    var lista = Object.keys(grupos).map(function (k) { return grupos[k]; });
+    var rango = function (arr, v) { var i = arr.indexOf(v); return i < 0 ? 99 : i; };
+    lista.sort(function (a, b) {
+      return rango(MARCAS, a.marca) - rango(MARCAS, b.marca) || a.marca.localeCompare(b.marca) ||
+             rango(ORDEN_SECCION, a.cat) - rango(ORDEN_SECCION, b.cat) || a.titulo.localeCompare(b.titulo);
+    });
+    lista.forEach(function (g) {
+      g.items.sort(function (a, b) {
+        return (b.imagen ? 1 : 0) - (a.imagen ? 1 : 0) || a.tipo.localeCompare(b.tipo) || titulo(a).localeCompare(titulo(b));
+      });
+    });
+    return lista;
+  }
+
+  function tarjeta(p) {
+    var nombre = esc(titulo(p)), info = esc(detalle(p));
+    if (p.imagen) {
+      return '<a class="card" href="' + esc(p.imagen) + '" data-cap="' + esc(p.id + ' · ' + titulo(p) + ' – ' + detalle(p)) + '">' +
+        '<span class="foto"><img src="' + esc(p.imagen) + '" width="714" height="1280" alt="' + nombre + ' – ' + info + '" loading="lazy" decoding="async">' +
+        '<span class="num">' + esc(p.id) + '</span></span>' +
+        '<span class="nombre">' + nombre + '</span><span class="tipo">' + info + '</span></a>';
+    }
+    return '<div class="card"><span class="foto sin-foto">' +
+      '<span class="linea">' + esc(p.linea || p.marca) + '</span><span class="regla"></span>' +
+      '<span class="aroma">' + nombre + '</span><span class="num">' + esc(p.id) + '</span></span>' +
+      '<span class="nombre">' + nombre + '</span><span class="tipo">' + info + '</span></div>';
+  }
+
+  function pintar(datos) {
+    var productos = sinRepetidos(datos.productos || []);
+    var grupos = agrupar(productos);
+    if (!productos.length) {
+      $('catalogo').innerHTML = '<div class="estado"><p>Por ahora no hay productos disponibles.</p></div>';
+      $('ayuda').textContent = 'Vuelve pronto.';
+      return;
+    }
+    var indice = '', cuerpo = '';
+    grupos.forEach(function (g) {
+      var id = slug(g.marca + ' ' + g.titulo), n = g.items.length;
+      var cuenta = n + ' producto' + (n === 1 ? '' : 's');
+      indice += '<li><a href="#' + id + '"><span class="t">' + esc(g.titulo) + '</span><span class="m">' +
+        esc(g.marca) + ' · ' + cuenta + '</span><span class="flecha" aria-hidden="true">→</span></a></li>';
+      cuerpo += '<section id="' + id + '" class="seccion"><div class="sec-head"><div>' +
+        '<p class="eyebrow">' + esc(g.marca) + ' <span>· ' + cuenta + '</span></p><h2>' + esc(g.titulo) + '</h2></div>' +
+        '<a class="pill" href="#indice">↑ Índice</a></div><div class="grid">' +
+        g.items.map(tarjeta).join('') + '</div></section>';
+    });
+    $('lista').innerHTML = indice;
+    $('catalogo').innerHTML = cuerpo;
+    $('ayuda').textContent = productos.length + ' productos disponibles · toca una sección para ir a ella';
+    $('pie').hidden = false;
+    activarVisor();
+    if (location.hash && document.querySelector(location.hash)) document.querySelector(location.hash).scrollIntoView();
+  }
+
+  function error() {
+    $('catalogo').innerHTML = '<div class="estado"><p>No pudimos cargar los productos. Revisa tu conexión e intenta de nuevo.</p>' +
+      '<button class="btn" type="button" id="reintentar">Reintentar</button></div>';
+    $('ayuda').textContent = '';
+    $('reintentar').addEventListener('click', cargar);
+  }
+
+  // Respaldo para navegadores que bloqueen fetch entre dominios
+  function jsonp(ok, falla) {
+    var nombre = 'cb' + Date.now(), s = document.createElement('script');
+    var t = setTimeout(function () { limpiar(); falla(); }, 20000);
+    function limpiar() { clearTimeout(t); delete window[nombre]; s.remove(); }
+    window[nombre] = function (d) { limpiar(); ok(d); };
+    s.onerror = function () { limpiar(); falla(); };
+    s.src = API + '?callback=' + nombre;
+    document.body.appendChild(s);
+  }
+
+  function cargar() {
+    $('catalogo').innerHTML = '<div class="estado cargando"><p>Cargando productos disponibles…</p></div>';
+    $('ayuda').textContent = 'Cargando productos disponibles…';
+    if (!window.fetch) return jsonp(pintar, error);
+    fetch(API, { cache: 'no-store' })
+      .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+      .then(pintar)
+      .catch(function () { jsonp(pintar, error); });
+  }
+
+  // Visor de fotos
+  var visor = $('visor'), img = visor.querySelector('img'), cap = visor.querySelector('.cap');
+  var cards = [], actual = 0;
+  function mostrar(i) {
+    actual = (i + cards.length) % cards.length;
+    var c = cards[actual];
+    img.src = c.getAttribute('href');
+    img.alt = c.querySelector('img').alt;
+    cap.textContent = c.getAttribute('data-cap');
+  }
+  function abrir(i) { mostrar(i); visor.hidden = false; document.documentElement.classList.add('lock'); }
+  function cerrar() { visor.hidden = true; document.documentElement.classList.remove('lock'); }
+  function activarVisor() {
+    cards = Array.prototype.slice.call(document.querySelectorAll('a.card'));
+    cards.forEach(function (c, i) { c.addEventListener('click', function (ev) { ev.preventDefault(); abrir(i); }); });
+  }
+  visor.querySelector('.cerrar').addEventListener('click', cerrar);
+  visor.querySelector('.ant').addEventListener('click', function () { mostrar(actual - 1); });
+  visor.querySelector('.sig').addEventListener('click', function () { mostrar(actual + 1); });
+  visor.addEventListener('click', function (ev) { if (ev.target === visor) cerrar(); });
+  document.addEventListener('keydown', function (ev) {
+    if (visor.hidden) return;
+    if (ev.key === 'Escape') cerrar();
+    if (ev.key === 'ArrowLeft') mostrar(actual - 1);
+    if (ev.key === 'ArrowRight') mostrar(actual + 1);
+  });
+  var x0 = null;
+  visor.addEventListener('touchstart', function (ev) { x0 = ev.touches[0].clientX; }, { passive: true });
+  visor.addEventListener('touchend', function (ev) {
+    if (x0 === null) return;
+    var dx = ev.changedTouches[0].clientX - x0;
+    if (Math.abs(dx) > 50) mostrar(actual + (dx < 0 ? 1 : -1));
+    x0 = null;
+  });
+
+  // Botón flotante
+  var indice = $('indice'), flot = $('flotante');
+  function revisar() { flot.classList.toggle('ver', window.scrollY > indice.offsetTop + indice.offsetHeight); }
+  window.addEventListener('scroll', revisar, { passive: true });
+  revisar();
+
+  cargar();
+})();
+</script>
+</body>
+</html>
